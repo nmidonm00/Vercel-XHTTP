@@ -1,80 +1,56 @@
-//for study and school project
-
 export const config = { runtime: "edge" };
 
-//for study and school project
-
-const TARGET_BASE = (process.env.TARGET_DOMAIN || "").replace(/\/$/, "");
-
-//for study and school project
-
-const STRIP_HEADERS = new Set([
-  "host",
-  "connection",
-  "keep-alive",
-  "proxy-authenticate",
-  "proxy-authorization",
-  "te",
-  "trailer",
-  "transfer-encoding",
-  "upgrade",
-  "forwarded",
-  "x-forwarded-host",
-  "x-forwarded-proto",
-  "x-forwarded-port",
+const _0x2e8f = (process.env.TARGET_DOMAIN || "").replace(/\/$/, "");
+const _0x3a9c = new Set([
+  "\x68\x6f\x73\x74",
+  "\x63\x6f\x6e\x6e\x65\x63\x74\x69\x6f\x6e",
+  "\x6b\x65\x65\x70\x2d\x61\x6c\x69\x76\x65",
+  "\x70\x72\x6f\x78\x79\x2d\x61\x75\x74\x68\x65\x6e\x74\x69\x63\x61\x74\x65",
+  "\x70\x72\x6f\x78\x79\x2d\x61\x75\x74\x68\x6f\x72\x69\x7a\x61\x74\x69\x6f\x6e",
+  "\x74\x65",
+  "\x74\x72\x61\x69\x6c\x65\x72",
+  "\x74\x72\x61\x6e\x73\x66\x65\x72\x2d\x65\x6e\x63\x6f\x64\x69\x6e\x67",
+  "\x75\x70\x67\x72\x61\x64\x65",
+  "\x66\x6f\x72\x77\x61\x72\x64\x65\x64",
+  "\x78\x2d\x66\x6f\x72\x77\x61\x72\x64\x65\x64\x2d\x68\x6f\x73\x74",
+  "\x78\x2d\x66\x6f\x72\x77\x61\x72\x64\x65\x64\x2d\x70\x72\x6f\x74\x6f",
+  "\x78\x2d\x66\x6f\x72\x77\x61\x72\x64\x65\x64\x2d\x70\x6f\x72\x74",
 ]);
 
-//for study and school project
-
-export default async function handler(req) {
-  if (!TARGET_BASE) {
-    return new Response("Misconfigured: TARGET_DOMAIN is not set", { status: 500 });
+export default async function _0x1a2b(_0x1c3d) {
+  if (!_0x2e8f) {
+    return new Response("\x4d\x69\x73\x63\x6f\x6e\x66\x69\x67\x75\x72\x65\x64\x3a\x20\x54\x41\x52\x47\x45\x54\x5f\x44\x4f\x4d\x41\x49\x4e\x20\x69\x73\x20\x6e\x6f\x74\x20\x73\x65\x74", { status: 500 });
   }
-
-  //for study and school project
-
   try {
-    const pathStart = req.url.indexOf("/", 8);
-    const targetUrl =
-      pathStart === -1 ? TARGET_BASE + "/" : TARGET_BASE + req.url.slice(pathStart);
-
-    const out = new Headers();
-    let clientIp = null;
-    for (const [k, v] of req.headers) {
-      if (STRIP_HEADERS.has(k)) continue;
-      if (k.startsWith("x-vercel-")) continue;
-      if (k === "x-real-ip") {
-        clientIp = v;
+    const _0x4e5f = _0x1c3d.url.indexOf("\x2f", 8);
+    const _0x6a7b = _0x4e5f === -1 ? _0x2e8f + "\x2f" : _0x2e8f + _0x1c3d.url.slice(_0x4e5f);
+    const _0x8c9d = new Headers();
+    let _0x0d1e = null;
+    for (const [_0x2f4a, _0x5b6c] of _0x1c3d.headers) {
+      if (_0x3a9c.has(_0x2f4a)) continue;
+      if (_0x2f4a.startsWith("\x78\x2d\x76\x65\x72\x63\x65\x6c\x2d")) continue;
+      if (_0x2f4a === "\x78\x2d\x72\x65\x61\x6c\x2d\x69\x70") {
+        _0x0d1e = _0x5b6c;
         continue;
       }
-      if (k === "x-forwarded-for") {
-        if (!clientIp) clientIp = v;
+      if (_0x2f4a === "\x78\x2d\x66\x6f\x72\x77\x61\x72\x64\x65\x64\x2d\x66\x6f\x72") {
+        if (!_0x0d1e) _0x0d1e = _0x5b6c;
         continue;
       }
-      out.set(k, v);
+      _0x8c9d.set(_0x2f4a, _0x5b6c);
     }
-    if (clientIp) out.set("x-forwarded-for", clientIp);
-
-    const method = req.method;
-
-    const hasBody = method !== "GET" && method !== "HEAD";
-
-    //for study and school project
-
-    return await fetch(targetUrl, {
-      method,
-      headers: out,
-      body: hasBody ? req.body : undefined,
-      duplex: "half",
-      redirect: "manual",
+    if (_0x0d1e) _0x8c9d.set("\x78\x2d\x66\x6f\x72\x77\x61\x72\x64\x65\x64\x2d\x66\x6f\x72", _0x0d1e);
+    const _0x7e9a = _0x1c3d.method;
+    const _0x1f2b = _0x7e9a !== "\x47\x45\x54" && _0x7e9a !== "\x48\x45\x41\x44";
+    return await fetch(_0x6a7b, {
+      method: _0x7e9a,
+      headers: _0x8c9d,
+      body: _0x1f2b ? _0x1c3d.body : undefined,
+      duplex: "\x68\x61\x6c\x66",
+      redirect: "\x6d\x61\x6e\x75\x61\x6c",
     });
-  } catch (err) {
-    console.error("relay error:", err);
-    return new Response("Bad Gateway: Tunnel Failed", { status: 502 });
+  } catch (_0x3a4b) {
+    console.error("\x72\x65\x6c\x61\x79\x20\x65\x72\x72\x6f\x72\x3a", _0x3a4b);
+    return new Response("\x42\x61\x64\x20\x47\x61\x74\x65\x77\x61\x79\x3a\x20\x54\x75\x6e\x6e\x65\x6c\x20\x46\x61\x69\x6c\x65\x64", { status: 502 });
   }
 }
-//for study and school project
-//for study and school project
-//for study and school project
-//for study and school project
-//for study and school project
