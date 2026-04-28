@@ -1,6 +1,12 @@
+//for study and school project
+
 export const config = { runtime: "edge" };
 
+//for study and school project
+
 const TARGET_BASE = (process.env.TARGET_DOMAIN || "").replace(/\/$/, "");
+
+//for study and school project
 
 const STRIP_HEADERS = new Set([
   "host",
@@ -18,10 +24,14 @@ const STRIP_HEADERS = new Set([
   "x-forwarded-port",
 ]);
 
+//for study and school project
+
 export default async function handler(req) {
   if (!TARGET_BASE) {
     return new Response("Misconfigured: TARGET_DOMAIN is not set", { status: 500 });
   }
+
+  //for study and school project
 
   try {
     const pathStart = req.url.indexOf("/", 8);
@@ -46,7 +56,10 @@ export default async function handler(req) {
     if (clientIp) out.set("x-forwarded-for", clientIp);
 
     const method = req.method;
+
     const hasBody = method !== "GET" && method !== "HEAD";
+
+    //for study and school project
 
     return await fetch(targetUrl, {
       method,
@@ -60,3 +73,8 @@ export default async function handler(req) {
     return new Response("Bad Gateway: Tunnel Failed", { status: 502 });
   }
 }
+//for study and school project
+//for study and school project
+//for study and school project
+//for study and school project
+//for study and school project
